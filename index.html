@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="grid-wrapper-main">
+            <header class="heading-dashboard">
+                <h1 class="dashboard-heading">Weather Dashboard</h1>
+            </header>
+            <div class="weather-search">
+                <div class="search-container">
+                    <div class="search-box">
+                    <input id="city-search" type="text" placeholder="Search.." aria-label="search" />
+                    <button id="search-btn" type="submit" aria-label="submit-search"><i class="fa fa-search"></i></button>
+                    </div>
+                    <div class="break"></div>
+                    <div id="saved-searches"></div>
+                </div>
+            </div>
+            <div class="weather-main">
+                <div class="forecast-today">
+                    <h3 id="weather-city" ></h3>
+                    <h4 id="weather-today" ></h4>
+                    <p class="conditions"></p><br>
+                    <p class="temp-today"></p><br>
+                    <p class="humidity-today"></p><br>                    
+                    <p class="wind-speed-today"></p><br>                  
+                    <p class="uv-index-today"></p><br>
+                </div>
+                <div id="future-forecast" class="forecast-future"></div>
+            </div>
+        </div> 
+    </main>
+
+ <script src="./js/script.js"></script>   
+</body>
+</html>
