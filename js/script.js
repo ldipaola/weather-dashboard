@@ -1,17 +1,21 @@
 
 var userInput = "";
 var savedCities = [];
+var defaultCity = "";
 //Constructor 
 function City(name) {
     this.name = name;
 }
-var defaultCity = 'Melbourne,Au';
+
 
 if (localStorage.getItem('saved-cities') !== null){
     savedCities =  JSON.parse(localStorage.getItem('saved-cities'));
     savedCities.forEach(element => {
         createButtons(element.name);  
     });
+    defaultCity = savedCities[savedCities.length-1].name;
+}else {
+     defaultCity = 'Melbourne,Au';
 }
 
 getWeather(defaultCity);
@@ -116,12 +120,6 @@ fetch(currentWeatherUrl)
         div.appendChild(humidity);
         document.getElementById("future-forecast").appendChild(div);
        }
-     console.log(data);
-
-
-
-     var iconcode = '';
-     var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
     
  })
     
@@ -134,12 +132,10 @@ function getUserInput (e) {
 
     if (e.type === 'click'){
      userInput = searchBox.value;
-     console.log(userInput);
      getWeather(userInput);
      saveCity(userInput);
     } else if (e.key === 'Enter') {
         userInput = searchBox.value;
-        console.log(userInput)
         getWeather(userInput);
         saveCity(userInput);
     }
@@ -151,7 +147,6 @@ var searchBox = document.querySelector("#city-search");
 searchBtn.addEventListener("click", getUserInput);
 searchBox.addEventListener("keyup", getUserInput);
 document.body.addEventListener( 'click', function ( event ) {
-    console.log(event.srcElement);
     if(event.srcElement.classList.contains('saved-search-btn') ) {
         document.querySelector("#city-search").value = event.srcElement.textContent;
         getWeather (event.srcElement.textContent);
@@ -166,7 +161,6 @@ function saveCity(userInput) {
     var newCityObj = new City(userInput);
     savedCities.push(newCityObj);
     localStorage.setItem("saved-cities", JSON.stringify(savedCities));
-    console.log(savedCities);
     createButtons(userInput);
 
 }
@@ -175,13 +169,10 @@ function createButtons(userInput) {
     var newButton = document.createElement('a');
     newButton.textContent = userInput;
     newButton.classList.add('saved-search-btn');
-    document.querySelector("#saved-searches").appendChild(newButton);
+    document.querySelector("#saved-searches").prepend(newButton);
 
 }
 
-function buttonClickSearch() {
-
-}
 
 function dateString (unixDate) {
     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
